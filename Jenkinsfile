@@ -14,8 +14,8 @@ tools {
         NEXUS_CREDENTIAL_ID = "nexuslogin"
         ARTVERSION = "${env.BUILD_ID}"
     }
-	
-    stages{
+	timestamps {
+    // stages{
         
         stage('BUILD'){
             steps {
