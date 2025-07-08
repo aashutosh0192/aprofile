@@ -81,9 +81,9 @@ pipeline {
             steps {
                 timeout(time: 1, unit: 'MINUTES') {
                 script {
-                    def vprofile-qg = waitForQualityGate()
-                    if (vprofile-qg.status != 'OK') {
-                    error "Pipeline aborted due to quality gate failure: ${vprofile-qg.status}"
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
                     }
                 }
                 }
