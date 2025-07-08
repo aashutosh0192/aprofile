@@ -77,13 +77,18 @@ pipeline {
           }
         }
         
-        stage("Quality Gate") {
+        stage('Quality Gate') {
             steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
+                timeout(time: 1, unit: 'MINUTES') {
+                script {
+                    def vprofile-qg = waitForQualityGate()
+                    if (vprofile-qg.status != 'OK') {
+                    error "Pipeline aborted due to quality gate failure: ${vprofile-qg.status}"
+                    }
+                }
+                }
             }
-          }
+            }
 
         // stage("Publish to Nexus Repository Manager") {
         //     steps {
